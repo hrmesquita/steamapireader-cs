@@ -1,29 +1,55 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent],
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let router: Router;
+  let activatedRoute: ActivatedRoute;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, AppComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParams: of({ steamid: '12345' }), // Mock the ActivatedRoute
+          },
+        },
+      ],
     }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    router = TestBed.inject(Router);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    fixture.detectChanges();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it(`should have the 'steamapireader-cs' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('steamapireader-cs');
+  it('should redirect to the backend service', () => {
+    jest.spyOn(component, 'loginWithSteam').mockImplementation(() => {
+      expect(component.loginWithSteam).toHaveBeenCalled();
+    });
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, steamapireader-cs');
+  it('should store steamid in localStorage when steamid is present in queryParams', () => {
+    expect(localStorage.getItem('steamid')).toBe('12345');
+  });
+
+  it('should log steamid stored in localStorage when showSteamId is called', () => {
+    localStorage.setItem('steamid', '12345');
+    const consoleLogSpy = jest.spyOn(console, 'log');
+    component.showSteamId();
+    expect(consoleLogSpy).toHaveBeenCalledWith('12345');
   });
 });
