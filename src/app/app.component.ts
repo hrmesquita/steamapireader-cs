@@ -24,8 +24,4 @@ export class AppComponent {
       }
     });
   }
-
-  showSteamId() {
-    console.log(localStorage.getItem('steamid'));
-  }
 }
