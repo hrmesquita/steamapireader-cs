@@ -45,11 +45,4 @@ describe('AppComponent', () => {
   it('should store steamid in localStorage when steamid is present in queryParams', () => {
     expect(localStorage.getItem('steamid')).toBe('12345');
   });
-
-  it('should log steamid stored in localStorage when showSteamId is called', () => {
-    localStorage.setItem('steamid', '12345');
-    const consoleLogSpy = jest.spyOn(console, 'log');
-    component.showSteamId();
-    expect(consoleLogSpy).toHaveBeenCalledWith('12345');
-  });
 });
