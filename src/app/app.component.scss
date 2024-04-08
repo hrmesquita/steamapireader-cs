@@ -1,9 +1,5 @@
-body {
-  border: red 5px solid;
-  height: 100vh;
-}
-
 .background-class {
   background: linear-gradient(to bottom, #4c0059, #000) !important;
-  background-size: cover;
+  display: flex;
+  flex-direction: column;
 }
