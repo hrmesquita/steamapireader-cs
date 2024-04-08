@@ -1,0 +1,49 @@
+.steam-button {
+  border: 2px solid red;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.steam-button img {
+  width: 150px;
+  height: 30px;
+  background-size: cover;
+}
+
+.steam-button img:hover {
+  width: 150px;
+  height: 30px;
+  background-size: cover;
+  opacity: 0.8;
+}
+
+.body-div {
+  height: 100vh; /* Set entire viewport height */
+  display: flex; /* Flexbox for vertical centering */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center elements horizontally */
+}
+
+h1 {
+  font-size: 2em; /* Adjust font size as desired */
+  color: #fff; /* White text color */
+  margin-top: 10%; /* Position 10% from the top */
+  font-family: 'Raleway', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+.login-box {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  border-radius: 5px;
+  padding: 20px;
+  width: 20em;
+  height: 20em;
+  position: relative;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

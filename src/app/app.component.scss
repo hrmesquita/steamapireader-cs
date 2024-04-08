@@ -1,12 +1,9 @@
-.steam-button {
-  border: none;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
+body {
+  border: red 5px solid;
+  height: 100vh;
 }
 
-.steam-button img {
-  width: 150px;
-  height: 30px;
+.background-class {
+  background: linear-gradient(to bottom, #4c0059, #000) !important;
   background-size: cover;
 }
