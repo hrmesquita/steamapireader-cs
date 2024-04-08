@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "passport": "^0.5.2",
+    "passport-steam": "^1.0.17"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.3.4"
+  }
+}
