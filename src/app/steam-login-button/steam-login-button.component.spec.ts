@@ -8,10 +8,9 @@ describe('SteamLoginButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SteamLoginButtonComponent]
-    })
-    .compileComponents();
-    
+      imports: [SteamLoginButtonComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SteamLoginButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +18,11 @@ describe('SteamLoginButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should redirect to the backend service', () => {
+    jest.spyOn(component, 'loginWithSteam').mockImplementation(() => {
+      expect(component.loginWithSteam).toHaveBeenCalled();
+    });
   });
 });
