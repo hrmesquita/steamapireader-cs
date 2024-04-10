@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { SteamLoginButtonComponent } from './steam-login-button/steam-login-button.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, SteamLoginButtonComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  loginWithSteam() {
-    window.location.href = 'http://localhost:7069/api/auth/steam';
-  }
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {

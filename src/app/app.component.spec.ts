@@ -36,12 +36,6 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should redirect to the backend service', () => {
-    jest.spyOn(component, 'loginWithSteam').mockImplementation(() => {
-      expect(component.loginWithSteam).toHaveBeenCalled();
-    });
-  });
-
   it('should store steamid in localStorage when steamid is present in queryParams', () => {
     expect(localStorage.getItem('steamid')).toBe('12345');
   });

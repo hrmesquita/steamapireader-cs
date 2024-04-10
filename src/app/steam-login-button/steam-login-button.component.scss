@@ -1,0 +1,79 @@
+.steam-button {
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+}
+
+.steam-button img {
+  height: 4vh;
+  max-width: 100%;
+  background-size: cover;
+}
+
+.steam-button img:hover {
+  background-size: cover;
+  opacity: 0.8;
+}
+
+.body-div {
+  height: calc(100vh - 5vh);
+  box-sizing: border-box;
+  display: flex; /* Flexbox for vertical centering */
+  flex-direction: column;
+  justify-content: center; /* Center elements horizontally */
+  align-items: center; /* Center elements horizontally */
+}
+
+h1 {
+  font-size: 3em; /* Adjust font size as desired */
+  color: #fff; /* White text color */
+  margin-top: 10%; /* Position 10% from the top */
+  font-family: 'Raleway', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+h3 {
+  font-size: 1.1em; /* Adjust font size as desired */
+  color: #fff; /* White text color */
+  margin-top: 10%; /* Position 10% from the top */
+  font-family: 'Roboto', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 505;
+  font-style: normal;
+}
+
+.login-box {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  border-radius: 5px;
+  padding: 20px;
+  width: 35em;
+  height: 20em;
+  position: relative;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fancy {
+  transform: translate(-50%, -50%);
+  background-image: linear-gradient(#4c0059, #4c0059);
+  background-size: 100% 10px;
+  background-repeat: no-repeat;
+  background-position: 110% 0%;
+  transition: background-size 0.7s, background-position 0.5s ease-in-out;
+}
+
+.fancy:hover {
+  background-size: 100% 100%;
+  background-position: 0% 100%;
+  transition: background-position 0.7s, background-size 0.5s ease-in-out;
+}
+
+.shading {
+  text-shadow: 2px 2px 6px #bd89c6;
+}
