@@ -1,4 +1,23 @@
-<div *ngIf="userInfo">
-  <img [src]="userInfo.avatarfull" alt="User Avatar" />
-  <span>{{ userInfo.personaname }}</span>
+<div class="container" *ngIf="userInfo && userStats">
+  <div class="user-info">
+    <img class="avatar" src="{{ userInfo.avatarfull }}" alt="Avatar" />
+    <div class="stats">
+      <h2>{{ userInfo.personaname }}</h2>
+      <div class="stat">
+        <span class="stat-label">Steam ID:</span>
+        <span class="stat-value">{{ userInfo.steamid }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="cs-stats">
+    <h2>Counter-Strike Stats</h2>
+    <div class="stat">
+      <ng-container *ngFor="let stat of userStats.stats">
+        <div class="stat" *ngIf="hasTotalKills(stat)">
+          <span class="stat-label"> {{ stat.name }} </span>
+          <span class="stat-value">{{ stat.value }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
 </div>

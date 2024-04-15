@@ -5,7 +5,7 @@ const passportSteam = require('passport-steam');
 const axios = require('axios');
 const SteamStrategy = passportSteam.Strategy;
 const app = express();
-const apiKey = 'A353DC41CDDD8B27986AAC9B0D4408AC';
+const apiKey = '';
 const cors = require('cors');
 
 const port = 7069;
@@ -95,6 +95,24 @@ app.get('/api/steamid/:steamid', (req, res) => {
     .then((response) => {
       // Handle the response from the API
       const playerSummaries = response.data.response.players;
+      console.log(playerSummaries);
+      res.send(playerSummaries);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error retrieving player summaries');
+    });
+});
+
+app.get('/api/cs/:steamid', (req, res) => {
+  const steamid = req.params.steamid;
+  const url = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${apiKey}&steamid=${steamid}`;
+
+  axios
+    .get(url)
+    .then((response) => {
+      // Handle the response from the API
+      const playerSummaries = response.data.playerstats;
       console.log(playerSummaries);
       res.send(playerSummaries);
     })

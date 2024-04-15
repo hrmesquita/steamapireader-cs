@@ -18,6 +18,12 @@ export class AppComponent implements OnInit {
     private localStorageService: LocalStorageCheckerService,
   ) {}
 
+  /**
+   * Initializes the component.
+   * If a 'steamid' value is present in the local storage, navigates to the 'stats' route.
+   * If not, checks the query parameters and if a 'steamid' parameter is present,
+   * stores it in the local storage and navigates to the 'stats' route.
+   */
   ngOnInit(): void {
     if (this.localStorageService.hasValue('steamid')) {
       this.router.navigateByUrl('stats');
@@ -26,9 +32,16 @@ export class AppComponent implements OnInit {
         const steamId = params['steamid'];
         if (steamId) {
           localStorage.setItem('steamid', steamId);
-          this.router.navigateByUrl('stats');
+          this.redirectToStats();
         }
       });
     }
+  }
+
+  /**
+   * Redirects the user to the 'stats' route.
+   */
+  private redirectToStats() {
+    this.router.navigateByUrl('stats');
   }
 }
