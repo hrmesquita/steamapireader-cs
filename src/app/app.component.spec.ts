@@ -32,11 +32,10 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the app', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should store steamid in localStorage when steamid is present in queryParams', () => {
+  it('should redirect to stats route if steamid is present in local storage', () => {
     expect(localStorage.getItem('steamid')).toBe('12345');
+    jest.spyOn(router, 'navigateByUrl');
+    component.ngOnInit();
+    expect(router.navigateByUrl).toHaveBeenCalledWith('stats');
   });
 });
