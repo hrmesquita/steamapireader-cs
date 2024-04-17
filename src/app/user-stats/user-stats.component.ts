@@ -116,7 +116,7 @@ export class UserStatsComponent implements OnInit {
       });
   }
 
-  private hasTotalKills(key: any): boolean {
+  hasTotalKills(key: any): boolean {
     return key.name.includes('ak47');
   }
 }
