@@ -5,13 +5,15 @@ const passportSteam = require('passport-steam');
 const axios = require('axios');
 const SteamStrategy = passportSteam.Strategy;
 const app = express();
-const apiKey = '';
 const cors = require('cors');
+const helper = require('./helper');
+const envconf = helper.environmentPicker(process.argv);
+const apiKey = envconf.apiKey;
 
 const port = 7069;
 
 const corsOptions = {
-  origin: 'http://localhost:4200',
+  origin: envconf.fullURL,
   optionsSuccessStatus: 200,
 };
 
@@ -30,8 +32,8 @@ passport.deserializeUser((user, done) => {
 passport.use(
   new SteamStrategy(
     {
-      returnURL: 'http://localhost:' + port + '/api/auth/steam/return',
-      realm: 'http://localhost:' + port + '/',
+      returnURL: envconf.url + ':' + envconf.port + '/api/auth/steam/return',
+      realm: envconf.url + ':' + envconf.port + '/',
       apiKey: apiKey,
     },
     function (identifier, profile, done) {
@@ -64,7 +66,6 @@ app.listen(port, () => {
 });
 
 app.get('/', (req, res) => {
-  // SEND USER DATA TO YOUR DATA BASE HERE
   res.send(req.user);
   console.log(req.user);
 });

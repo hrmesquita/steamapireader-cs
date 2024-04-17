@@ -31,34 +31,64 @@ export class UserStatsComponent implements OnInit {
    * Otherwise, retrieves the user stats from the local storage.
    */
   ngOnInit(): void {
-    if (this.isBrowser) {
-      if (!this.isPlayerSteamIdPresent()) {
-        window.location.href = '';
-      } else {
-        if (!this.isPlayerUserInfoPresent()) {
-          this.loadUserInfo();
-        } else {
-          this.loadUserStats();
-          this.userInfo = JSON.parse(
-            localStorage.getItem('userInfo') as string,
-          );
-        }
-      }
+    if (!this.isBrowser) {
+      return;
     }
+
+    if (!this.isPlayerSteamIdPresent()) {
+      window.location.href = '';
+      return;
+    }
+
+    if (!this.isPlayerUserInfoPresent()) {
+      this.getUserInfo();
+      return;
+    }
+
+    if (!this.isPlayerUserStatsPresent()) {
+      this.getUserStats();
+      return;
+    }
+
+    this.loadAllPlayerInfo();
   }
 
-  private isPlayerUserInfoPresent() {
-    return localStorage.getItem('userInfo');
-  }
-
+  /**
+   * Checks if the player's Steam ID is present in the local storage.
+   * @returns {string | null} The player's Steam ID if present, otherwise null.
+   */
   private isPlayerSteamIdPresent() {
     return localStorage.getItem('steamid');
   }
 
   /**
+   * Checks if the player's user info is present in the local storage.
+   * @returns {string | null} The player's user info if present, otherwise null.
+   */
+  private isPlayerUserInfoPresent() {
+    return localStorage.getItem('userInfo');
+  }
+
+  /**
+   * Checks if the player user stats are present in the local storage.
+   * @returns {string | null} The user stats stored in the local storage, or null if not present.
+   */
+  private isPlayerUserStatsPresent() {
+    return localStorage.getItem('userStats');
+  }
+
+  /**
+   * Loads all player information from local storage.
+   */
+  private loadAllPlayerInfo() {
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo') as string);
+    this.userStats = JSON.parse(localStorage.getItem('userStats') as string);
+  }
+
+  /**
    * Loads the user statistics from the API and stores them in the local storage.
    */
-  loadUserInfo(): void {
+  private getUserInfo(): void {
     this.http
       .get<UserInfo[]>(
         'http://localhost:7069/api/steamid/' + localStorage.getItem('steamid'),
@@ -66,10 +96,15 @@ export class UserStatsComponent implements OnInit {
       .subscribe((response) => {
         this.userInfo = response[0] as UserInfo;
         localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+        console.log('Successfully loaded user info');
       });
   }
 
-  loadUserStats(): void {
+  /**
+   * Loads the user statistics by making an HTTP GET request to the API.
+   * The user statistics are then stored in the component's state and in the local storage.
+   */
+  private getUserStats(): void {
     this.http
       .get<UserStats>(
         'http://localhost:7069/api/cs/' + localStorage.getItem('steamid'),
@@ -77,11 +112,11 @@ export class UserStatsComponent implements OnInit {
       .subscribe((response) => {
         this.userStats = response as UserStats;
         localStorage.setItem('userStats', JSON.stringify(this.userStats));
-        console.log(this.userStats);
+        console.log('Successfully loaded user stats');
       });
   }
 
-  hasTotalKills(key: any): boolean {
+  private hasTotalKills(key: any): boolean {
     return key.name.includes('ak47');
   }
 }

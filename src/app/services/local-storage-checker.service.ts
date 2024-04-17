@@ -5,6 +5,9 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalStorageCheckerService {
+  setSteamId(setSteamId: any) {
+    throw new Error('Method not implemented.');
+  }
   isBrowser: boolean;
   isServer: boolean;
 
