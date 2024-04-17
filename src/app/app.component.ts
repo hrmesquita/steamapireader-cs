@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private localStorageService: LocalStorageCheckerService,
+    private ngZone: NgZone,
   ) {}
 
   /**
@@ -26,13 +27,18 @@ export class AppComponent implements OnInit {
    */
   ngOnInit(): void {
     if (this.localStorageService.hasValue('steamid')) {
-      this.router.navigateByUrl('stats');
+      this.ngZone.run(() => {
+        // Wrap navigation inside NgZone
+        this.router.navigateByUrl('stats');
+      });
     } else {
       this.route.queryParams.subscribe((params) => {
         const steamId = params['steamid'];
         if (steamId) {
-          localStorage.setItem('steamid', steamId);
-          this.redirectToStats();
+          this.ngZone.run(() => {
+            // Wrap navigation inside NgZone
+            this.router.navigateByUrl('stats');
+          });
         }
       });
     }
@@ -42,6 +48,8 @@ export class AppComponent implements OnInit {
    * Redirects the user to the 'stats' route.
    */
   private redirectToStats() {
-    this.router.navigateByUrl('stats');
+    this.ngZone.run(() => {
+      this.router.navigateByUrl('stats');
+    });
   }
 }
