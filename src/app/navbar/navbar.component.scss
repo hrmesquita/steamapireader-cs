@@ -81,10 +81,12 @@ nav {
         text-decoration: none;
       
       }
-      
       img {
-        width: 100%;
-        height: $nav-height;
+        width: 80%;
+        height: auto;
+        max-height: $nav-height;
+        padding: 10%;
+        border-radius: 50%;
       } // Dropdown list
       ul li {
         min-width: 190px;
