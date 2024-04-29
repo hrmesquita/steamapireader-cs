@@ -11,6 +11,10 @@
       <ul class="nav-list">
         <li><a href="/stats">Stats</a></li>
         <li><a href="/about">About Us</a></li>
+        <ng-template [ngIf]="hasUserInfo()">
+          <li><span>{{ userInfo.personaname }}</span></li>
+          <li><img class="avatar" src="{{ userInfo.avatarfull }}" alt="Avatar" /></li>
+        </ng-template>
       </ul>
     </nav>
   </div>

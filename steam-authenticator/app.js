@@ -114,7 +114,6 @@ app.get('/api/cs/:steamid', (req, res) => {
     .then((response) => {
       // Handle the response from the API
       const playerSummaries = response.data.playerstats;
-      console.log(playerSummaries);
       res.send(playerSummaries);
     })
     .catch((error) => {

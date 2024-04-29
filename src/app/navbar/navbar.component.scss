@@ -43,7 +43,7 @@ nav {
   ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 50px 0 0;
     li {
       float: left;
       position: relative;
@@ -72,6 +72,19 @@ nav {
           padding-left: 4px;
           content: ' ▾';
         }
+      }
+      span {
+        display: block;
+        padding: 10px 20px 0 100px;
+        line-height: 50px;
+        color: $nav-font-color;
+        text-decoration: none;
+      
+      }
+      
+      img {
+        width: 100%;
+        height: $nav-height;
       } // Dropdown list
       ul li {
         min-width: 190px;

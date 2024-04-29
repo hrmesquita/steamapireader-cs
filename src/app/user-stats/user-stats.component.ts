@@ -117,6 +117,6 @@ export class UserStatsComponent implements OnInit {
   }
 
   hasTotalKills(key: any): boolean {
-    return key.name.includes('ak47');
+    return key.name.includes('map');
   }
 }
