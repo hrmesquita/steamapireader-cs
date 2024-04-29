@@ -1,5 +1,5 @@
 const EnvironmentConfig = require('./environments/environment-config');
-const jsonData = require('C:/Users/hugom/Desktop/dev/steam-api-key/config.json');
+const jsonData = require('C:/Users/hugom/Desktop/Dev/steam-api-key/config.json');
 
 /**
  * Retrieves the local API key from the configuration file.

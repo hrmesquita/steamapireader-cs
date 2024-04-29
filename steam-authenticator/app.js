@@ -32,8 +32,8 @@ passport.deserializeUser((user, done) => {
 passport.use(
   new SteamStrategy(
     {
-      returnURL: envconf.url + ':' + envconf.port + '/api/auth/steam/return',
-      realm: envconf.url + ':' + envconf.port + '/',
+      returnURL: envconf.url + ':' + port + '/api/auth/steam/return',
+      realm: envconf.url + ':' + port + '/',
       apiKey: apiKey,
     },
     function (identifier, profile, done) {
@@ -83,7 +83,7 @@ app.get(
   '/api/auth/steam/return',
   passport.authenticate('steam', { failureRedirect: '/' }),
   function (req, res) {
-    res.redirect(`http://localhost:4200/?steamid=${req.user._json.steamid}`);
+    res.redirect(`${envconf.fullURL}/?steamid=${req.user._json.steamid}`);
   },
 );
 

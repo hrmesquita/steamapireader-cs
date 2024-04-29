@@ -5,9 +5,6 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalStorageCheckerService {
-  setSteamId(setSteamId: any) {
-    throw new Error('Method not implemented.');
-  }
   isBrowser: boolean;
   isServer: boolean;
 
@@ -29,5 +26,15 @@ export class LocalStorageCheckerService {
       return false;
     }
     return false;
+  }
+
+  /**
+   * Sets the 'steamid' key in the local storage after confirming the platform.
+   * @param steamId - The Steam ID to store in the local storage.
+   */
+  setSteamId(steamId: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('steamid', steamId);
+    }
   }
 }

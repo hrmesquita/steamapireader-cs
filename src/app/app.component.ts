@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
         const steamId = params['steamid'];
         if (steamId) {
           this.ngZone.run(() => {
+            window.localStorage.setItem('steamid', steamId);
             // Wrap navigation inside NgZone
             this.router.navigateByUrl('stats');
           });
